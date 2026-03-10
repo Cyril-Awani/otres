@@ -1,216 +1,168 @@
 'use client';
 
-import { CATEGORIES } from '@/lib/data';
-import { CategoryHero } from '@/components/category-hero';
-import { CategorySection } from '@/components/category-section';
-import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import Link from 'next/link';
 
-export default function CategoriesContent() {
-	const searchParams = useSearchParams();
-	const [searchQuery, setSearchQuery] = useState('');
-
-	useEffect(() => {
-		const query = searchParams.get('search');
-		if (query) {
-			setSearchQuery(query);
-		}
-	}, [searchParams]);
-
+export function Footer() {
 	return (
-		<>
-			{/* Main Hero Section */}
-			<CategoryHero
-				title="Explore Our Delicious Categories"
-				subtitle="From traditional swallows to premium proteins - discover authentic flavors in every category"
-				backgroundImage="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=1200&q=80"
-			/>
+		<footer className="bg-gray-900 text-white py-12 px-4">
+			<div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+				{/* Logo & Social Section */}
+				<div className="col-span-2 md:col-span-1">
+					<h3 className="text-xl font-bold mb-4">
+						<span className="text-purple-400">Otres</span> Fast Food
+					</h3>
+					<p className="text-gray-400 mb-6">
+						Bringing you the best of African cuisine since 2020.
+					</p>
 
-			{/* Search Input */}
-			<motion.div
-				initial={{ opacity: 0, y: 10 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.5, delay: 0.5 }}
-				className="mt-6 w-full flex justify-center px-4"
-			>
-				<div className="w-full max-w-2xl relative">
-					<input
-						type="text"
-						value={searchQuery}
-						onChange={(e) => setSearchQuery(e.target.value)}
-						placeholder="Search categories or dishes..."
-						className="w-full px-4 py-3 bg-white rounded-xl shadow-md border border-gray-100 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
-					/>
-					{searchQuery && (
-						<button
-							onClick={() => setSearchQuery('')}
-							className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+					{/* Social Media Icons */}
+					<div className="flex space-x-4">
+						<Link
+							href="https://facebook.com"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="bg-gray-800 p-2 rounded-full hover:bg-purple-600 transition-colors duration-300"
+							aria-label="Facebook"
 						>
-							✕
-						</button>
-					)}
-				</div>
-			</motion.div>
-
-			{/* Search Results Summary */}
-			{searchQuery && (
-				<motion.p
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					className="text-sm text-gray-500 mt-2 text-center"
-				>
-					Search Results for: "{searchQuery}"
-				</motion.p>
-			)}
-
-			{/* Categories Content */}
-			<motion.div
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 1 }}
-				transition={{ duration: 0.6, delay: 0.3 }}
-				className="container mx-auto px-6 lg:px-8 md:py-10"
-			>
-				{/* Intro Text */}
-				<div className="hidden md:flex mb:4 md:mb-6 px-4">
-					<motion.div
-						initial={{ opacity: 0, y: 10 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5, delay: 0.4 }}
-						className="relative max-w-5xl mx-auto text-left md:text-center"
-					>
-						{/* Left Quote */}
-						<span className="absolute -left-3 -top-2 text-6xl text-gray-300 opacity-60 font-serif select-none">
-							“
-						</span>
-
-						<p className="text-sm md:text-xl text-muted-foreground italic leading-relaxed px-4">
-							Browse through our carefully curated categories. Each section
-							features a selection of our finest dishes, crafted with authentic
-							recipes and the freshest ingredients.
-						</p>
-
-						{/* Right Quote */}
-						<span className="absolute right-2 -bottom-5 text-6xl text-gray-300 opacity-60 font-serif select-none">
-							”
-						</span>
-					</motion.div>
-				</div>
-
-				{/* Category Sections - Only ONE instance */}
-				<div className="space-y-16">
-					{CATEGORIES.map((category, index) => (
-						<CategorySection
-							key={category.id}
-							category={category}
-							index={index}
-							searchQuery={searchQuery}
-						/>
-					))}
-				</div>
-			</motion.div>
-
-			{/* Footer Section with Wandalabs Credit */}
-			<motion.section
-				initial={{ opacity: 0, y: 30 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.6, delay: 0.8 }}
-				className="relative mt-20 py-20 overflow-hidden bg-[#2b1d14]"
-			>
-				{/* Decorative Pattern */}
-				<div className="absolute inset-0 opacity-10">
-					<div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full filter blur-3xl"></div>
-					<div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-500 rounded-full filter blur-3xl"></div>
-				</div>
-
-				<div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-					<div className="max-w-3xl mx-auto text-center">
-						<motion.h2
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							className="text-3xl md:text-4xl font-bold text-white mb-6"
+							<Facebook className="w-5 h-5" />
+						</Link>
+						<Link
+							href="https://twitter.com"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="bg-gray-800 p-2 rounded-full hover:bg-purple-600 transition-colors duration-300"
+							aria-label="Twitter"
 						>
-							Ready to Explore Our Menu?
-						</motion.h2>
-
-						<motion.p
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ delay: 0.1 }}
-							className="text-lg text-gray-300 mb-8"
+							<Twitter className="w-5 h-5" />
+						</Link>
+						<Link
+							href="https://instagram.com"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="bg-gray-800 p-2 rounded-full hover:bg-purple-600 transition-colors duration-300"
+							aria-label="Instagram"
 						>
-							From classic favorites to exciting new dishes, we have something
-							for everyone. Start your culinary journey with us today.
-						</motion.p>
-
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ delay: 0.2 }}
-							className="flex flex-wrap gap-4 justify-center"
+							<Instagram className="w-5 h-5" />
+						</Link>
+						<Link
+							href="https://youtube.com"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="bg-gray-800 p-2 rounded-full hover:bg-purple-600 transition-colors duration-300"
+							aria-label="YouTube"
 						>
-							<button className="px-8 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-								View Full Menu
-							</button>
-							<button className="px-8 py-3 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl">
-								Contact Us
-							</button>
-						</motion.div>
-
-						{/* Stats */}
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ delay: 0.3 }}
-							className="grid grid-cols-2 md:grid-cols-3 gap-8 mt-16 pt-16 border-t border-white/20"
-						>
-							<div>
-								<div className="text-3xl md:text-4xl font-bold text-white mb-2">
-									50+
-								</div>
-								<div className="text-sm text-gray-400">Dishes</div>
-							</div>
-							<div>
-								<div className="text-3xl md:text-4xl font-bold text-white mb-2">
-									15+
-								</div>
-								<div className="text-sm text-gray-400">Categories</div>
-							</div>
-							<div className="col-span-2 md:col-span-1">
-								<div className="text-3xl md:text-4xl font-bold text-white mb-2">
-									24/7
-								</div>
-								<div className="text-sm text-gray-400">Service</div>
-							</div>
-						</motion.div>
-
-						{/* Wandalabs Credit */}
-						<motion.div
-							initial={{ opacity: 0 }}
-							whileInView={{ opacity: 1 }}
-							viewport={{ once: true }}
-							transition={{ delay: 0.4 }}
-							className="mt-12 pt-8 border-t border-white/20"
-						>
-							<p className="text-sm text-gray-400">
-								Powered by{' '}
-								<a
-									href="https://wandalab.vercel.app"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="text-amber-400 hover:text-amber-300 transition-colors font-medium hover:underline"
-								>
-									Wandalabs
-								</a>
-							</p>
-						</motion.div>
+							<Youtube className="w-5 h-5" />
+						</Link>
 					</div>
 				</div>
-			</motion.section>
-		</>
+
+				{/* Quick Links */}
+				<div>
+					<h4 className="font-semibold mb-4">Quick Links</h4>
+					<ul className="space-y-2 text-gray-400">
+						<li>
+							<Link
+								href="/about"
+								className="hover:text-purple-400 transition-colors"
+							>
+								About Us
+							</Link>
+						</li>
+						<li>
+							<Link
+								href="/menu"
+								className="hover:text-purple-400 transition-colors"
+							>
+								Menu
+							</Link>
+						</li>
+						<li>
+							<Link
+								href="/contact"
+								className="hover:text-purple-400 transition-colors"
+							>
+								Contact
+							</Link>
+						</li>
+						<li>
+							<Link
+								href="/faqs"
+								className="hover:text-purple-400 transition-colors"
+							>
+								FAQs
+							</Link>
+						</li>
+					</ul>
+				</div>
+
+				{/* Categories */}
+				<div>
+					<h4 className="font-semibold mb-4">Categories</h4>
+					<ul className="space-y-2 text-gray-400">
+						<li>
+							<Link
+								href="/categories/rice-dishes"
+								className="hover:text-purple-400 transition-colors"
+							>
+								Rice Dishes
+							</Link>
+						</li>
+						<li>
+							<Link
+								href="/categories/swallows"
+								className="hover:text-purple-400 transition-colors"
+							>
+								Swallows
+							</Link>
+						</li>
+						<li>
+							<Link
+								href="/categories/soups"
+								className="hover:text-purple-400 transition-colors"
+							>
+								Soups
+							</Link>
+						</li>
+						<li>
+							<Link
+								href="/categories/proteins"
+								className="hover:text-purple-400 transition-colors"
+							>
+								Proteins
+							</Link>
+						</li>
+					</ul>
+				</div>
+
+				{/* Contact Info */}
+				<div>
+					<h4 className="font-semibold mb-4">Contact Us</h4>
+					<ul className="space-y-2 text-gray-400">
+						<li>123 Food Street, Lagos</li>
+						<li>+234 800 000 0000</li>
+						<li>info@otresfastfood.com</li>
+					</ul>
+				</div>
+			</div>
+
+			{/* Copyright */}
+			<div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+				<p>
+					&copy; 2024 Otres Fast Food. All rights reserved. <br />
+					<span>
+						Powered by{' '}
+						<a
+							href="https://wandalab.vercel.app"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-blue-400 hover:underline"
+						>
+							WandaLabs
+						</a>
+					</span>
+				</p>
+			</div>
+		</footer>
 	);
 }
